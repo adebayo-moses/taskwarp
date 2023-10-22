@@ -1,6 +1,8 @@
 // modules to control application life and native BrowserWindow
 const path = require("node:path");
 const { app, BrowserWindow } = require("electron");
+const electronReload = require("electron-reload");
+electronReload(__dirname);
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -10,7 +12,8 @@ function createWindow() {
   });
 
   mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
-  //   mainWindow.loadFile("index.html");
+  //  open devtools
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

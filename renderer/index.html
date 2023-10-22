@@ -6,6 +6,29 @@
     <title>Task Warp</title>
   </head>
   <body>
-    <h1>Hello World, we are on our way to a powerful todo app</h1>
+    <h1>Hello World, we are on our way to a powerful todo app, reload</h1>
+    <input type="text" id="taskInput" placeholder="Enter a task" />
+    <button id="addTask">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+      const { ipcRenderer } = require("electron");
+
+      document.getElementById("addTask").addEventListener("click", () => {
+        const taskInput = document.getElementById("taskInput");
+        const task = taskInput.value;
+        if (task.trim() !== "") {
+          ipcRenderer.send("add-task", task);
+          taskInput.value = "";
+        }
+      });
+
+      ipcRenderer.on("task-added", (event, task) => {
+        const taskList = document.getElementById("taskList");
+        const listItem = document.createElement("li");
+        listItem.textContent = task;
+        taskList.appendChild(listItem);
+      });
+    </script>
   </body>
 </html>

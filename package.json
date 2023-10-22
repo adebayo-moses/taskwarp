@@ -12,5 +12,8 @@
   "dependencies": {
     "electron": "^27.0.2",
     "electron-log": "^4.4.8"
+  },
+  "devDependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
   }
 }
